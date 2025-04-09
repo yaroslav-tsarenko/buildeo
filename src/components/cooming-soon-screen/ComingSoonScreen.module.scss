@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  height: 80dvh;
+  padding: 20px 90px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+
+  h1 {
+    font-size: var(--size-54px);
+
+    span {
+      color: var(--red);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.reviewEntity {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.reviewDetails {
+  margin-left: 10px;
+}
+
+.reviewDetails h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.reviewDetails p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}

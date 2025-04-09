@@ -1,0 +1,116 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  padding: 70px 0;
+}
+
+.reviewContent{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  @media screen and (max-width: 1028px) {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+.inner {
+  display: flex;
+  max-width: 1280px;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+}
+
+.incrementWrapper {
+  display: flex;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.image {
+  display: flex;
+  object-fit: cover;
+}
+
+.details {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 70px;
+  
+  @media screen and (max-width: 1028px) {
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    margin: 0 auto;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.incrementOrders {
+  display: flex;
+  gap: 10px;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.serviceDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  justify-content: space-between;
+  width: 100%;
+
+
+  h3{
+    color: var(--red);
+    font-size: var(--size-35px);
+  }
+}
+
+.reviewMetrics{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.navButtons {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-content: center;
+  justify-items: center;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  border: 1px solid var(--red);
+  padding: 40px;
+  border-radius: 20px;
+
+  h3 {
+    font-size: var(--size-25px);
+    display: flex;
+  }
+}
