@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { newRequest } from "@/utils/newRequest";
 import { ComponentType, ReactNode } from "react";
-import {UserProvider} from "@/context/UserContext";
+import { UserProvider } from "@/context/UserContext";
 
 interface WrappedComponentProps {
     children?: ReactNode;
@@ -23,9 +23,14 @@ export function authWrapper<T extends WrappedComponentProps>(Component: Componen
                 headers: { Authorization: `Bearer ${token}` },
             });
 
+            if (response.status !== 200) {
+                console.error("Fetch failed:", response.statusText);
+                throw new Error(`Fetch error! Status: ${response.status}`);
+            }
+
             user = response.data.user;
         } catch (error) {
-            console.log(error)
+            console.error("Error fetching user:", error);
         }
 
         return (
