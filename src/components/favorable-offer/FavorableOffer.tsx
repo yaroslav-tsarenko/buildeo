@@ -25,7 +25,7 @@ const FavorableOffer = () => {
             description: '',
             title: '',
             price: '',
-            photo: null, // Add photo to initialValues
+            photo: null,
         },
         validationSchema: Yup.object({
             category: Yup.string().required('Please select a category'),

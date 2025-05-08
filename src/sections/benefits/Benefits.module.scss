@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  padding: 5% 0;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  gap: 50px;
+
+  h2{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: var(--size-35px);
+    font-weight: 400;
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  gap: 20px;
+  height: fit-content;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+}

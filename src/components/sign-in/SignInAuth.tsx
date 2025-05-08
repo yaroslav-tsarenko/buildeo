@@ -10,11 +10,13 @@ import {newRequest} from "@/utils/newRequest";
 import {useAlert} from "@/context/AlertContext";
 import {navigate} from "@/constants/handleNav";
 import Link from "next/link";
+import {useUser} from "@/context/UserContext";
 
 const SignInAuth = () => {
 
     const [loading, setLoading] = useState(false);
     const { showAlert } = useAlert();
+    const user = useUser();
 
     const formik = useFormik({
         initialValues: {
@@ -33,7 +35,11 @@ const SignInAuth = () => {
                 document.cookie = `token=${response.data.token}; path=/`;
                 showAlert('Welcome back! Sign In is successful!', 'success');
                 setTimeout(() => {
-                    navigate("/account")
+                    if (user?.role === "admin") {
+                        navigate("/admin")
+                    } else {
+                        navigate("/main")
+                    }
                 }, 1500)
             } catch (error: unknown) {
                 console.error('Error logging in:', error);
