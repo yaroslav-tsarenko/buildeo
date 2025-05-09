@@ -17,23 +17,26 @@ export async function generateMetadata() {
         openGraph: {
             title,
             description,
-            type: "website",
             url: `https://${baseURL}`,
+            type: 'website',
             images: [
                 {
                     url: ogImage,
+                    width: 1200,
+                    height: 630,
                     alt: title,
                 },
             ],
         },
         twitter: {
-            card: "summary_large_image",
+            card: 'summary_large_image',
             title,
             description,
             images: [ogImage],
         },
     };
 }
+
 
 const Page = () => {
     return (
