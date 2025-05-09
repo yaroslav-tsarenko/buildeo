@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  padding: 5% 0;
+  gap: 30px;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 1028px;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.flexText {
+  display: flex;
+  max-width: 1440px;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 20px;
+
+  p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--dark-grey);
+    margin: 0;
+  }
+}

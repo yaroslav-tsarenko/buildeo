@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@100..800&family=Arimo:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@100..800&family=Arimo:ital,wght@0,400..700;1,400..700&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --dark-grey: #232323;
+  --dark-grey: #333333;
   --grey: #737b7d;
+  --light-grey: rgba(209, 209, 209, 0.42);
   --red: #E31E24;
   --size-1px: 0.0625rem;
   --size-2px: 0.125rem;
@@ -113,7 +114,7 @@ body {
 }
 
 * {
-  font-family: "Anek Latin", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   box-sizing: border-box;
   padding: 0;

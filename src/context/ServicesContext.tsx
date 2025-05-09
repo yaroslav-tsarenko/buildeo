@@ -28,6 +28,7 @@ export const ServicesProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     useEffect(() => {
         const fetchServices = async () => {
             setLoading(true);
+            console.log(loading)
             try {
                 const response = await newRequest.get('/service/get-all');
                 setServices(response.data);
@@ -43,11 +44,13 @@ export const ServicesProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     return (
         <ServicesContext.Provider value={{ services }}>
-            {loading ?
-                <>Loading...</>
-                :
-                <>{children}</>
-            }
+            {loading ? (
+                <div>Loading...</div>
+            ) : (
+                <div>
+                    {children}
+                </div>
+            )}
         </ServicesContext.Provider>
     );
 };

@@ -152,7 +152,7 @@ const CurrentService = () => {
                                 className={styles.orderButton}
                                 variant="contained"
                                 color="error"
-                                sx={{ borderRadius: "50px", width: "100%", textTransform: "none" }}
+                                sx={{ borderRadius: "50px", width: "100%", textTransform: "none", boxShadow: "none" }}
                                 onClick={() => {
                                     if (user && service) {
                                         handleCreateChat(user, service, showAlert);

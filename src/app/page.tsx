@@ -1,15 +1,16 @@
 import React from 'react';
+import Benefits from '@/sections/benefits/Benefits';
+import NumberOneAtMarket from "@/sections/number-one-at-market/NumberOneAtMarket";
+import RatePropertySection from "@/sections/rate-property/RatePropertySection";
 import Main from "@/sections/main/Main";
-import {ServicesProvider} from "@/context/ServicesContext";
-import ServicesContent from "@/components/services-content/ServicesContent";
 
 const Page = () => {
     return (
         <>
-            <ServicesProvider>
-                <Main/>
-                <ServicesContent/>
-            </ServicesProvider>
+            <Main/>
+            <Benefits/>
+            <RatePropertySection/>
+            <NumberOneAtMarket/>
         </>
     );
 };

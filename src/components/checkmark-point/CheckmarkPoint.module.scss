@@ -1,0 +1,11 @@
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  gap: 15px;
+  align-content: center;
+  justify-items: center;
+  padding: 1%;
+  font-size: var(--size-25px);
+}

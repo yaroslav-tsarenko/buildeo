@@ -3,22 +3,31 @@
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import logo from "@/assets/logos/logo-white.svg";
+import logoDark from "@/assets/logos/buildeo-logo-dark.svg";
 import Image from "next/image";
 import styles from "./Header.module.scss";
-import { Button, IconButton, Tooltip, Menu, MenuItem, Typography, Drawer } from "@mui/material";
+import { Button, IconButton, Menu, MenuItem, Typography, Drawer } from "@mui/material";
 import { PiChatTeardropTextThin, PiUserCircleThin } from "react-icons/pi";
 import { useUser } from "@/context/UserContext";
 import Link from "next/link";
 import { CiMenuBurger } from "react-icons/ci";
+import { LiaTimesSolid } from "react-icons/lia";
+import { RxHamburgerMenu } from "react-icons/rx";
+import CustomTooltip from '../toolltip/CustomTooltip';
+import { headerContent } from "@/assets/config/content"
+import { LuUserPlus } from "react-icons/lu";
+import { LuUserRoundCheck } from "react-icons/lu";
 
 const Header = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [desktopDrawerOpen, setDesktopDrawerOpen] = useState(false);
     const user = useUser();
     const pathname = usePathname();
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
+        console.log(drawerOpen)
     };
 
     const handleMenuClose = () => {
@@ -38,125 +47,122 @@ const Header = () => {
 
     return (
         <header className={styles.header}>
-            <Tooltip title="Go Home" placement="bottom" arrow>
-                <Image className={styles.logo} src={logo} alt="Logo" width={174} height={59} />
-            </Tooltip>
-            <div className={styles.nav}>
-                <Tooltip title="Home Page">
-                    <Link href="/">
-                        <Button sx={{ color: "white", textTransform: "none", borderRadius: "50px" }}>Home</Button>
-                    </Link>
-                </Tooltip>
-                <Tooltip title="Favorable Offer">
-                    <Link href="/favorable-offer">
-                        <Button sx={{ color: "white", textTransform: "none", borderRadius: "50px" }}>
-                            {user?.role === "buyer" ? "Favorable Offer" : "Provide a Service"}
-                        </Button>
-                    </Link>
-                </Tooltip>
-                {user ? (
-                    <>
-                        <Tooltip title="My Chats">
-                            <Link href="/chat">
-                                <IconButton sx={{ color: "white" }}><PiChatTeardropTextThin/></IconButton>
+            <div className={styles.headerInner}>
+                <div className={styles.logoMenu}>
+                    <CustomTooltip title={headerContent.menuTooltip}>
+                        <IconButton sx={{color: "white"}} onClick={() => setDesktopDrawerOpen(true)}>
+                            <RxHamburgerMenu/>
+                        </IconButton>
+                    </CustomTooltip>
+                    <CustomTooltip title={headerContent.homeTooltip} placement="bottom" arrow>
+                        <Image className={styles.logo} src={logo} alt={headerContent.logoAlt} width={174} height={59}/>
+                    </CustomTooltip>
+                </div>
+                <div className={styles.nav}>
+                    {headerContent.navLinks.map((link) => (
+                        <CustomTooltip title={link.tooltip} key={link.href}>
+                            <Link href={link.href}>
+                                <Button sx={{color: "white", textTransform: "none", borderRadius: "50px"}}>
+                                    {link.conditionalLabel
+                                        ? user?.role === "buyer"
+                                            ? link.conditionalLabel.buyer
+                                            : link.conditionalLabel.other
+                                        : link.label}
+                                </Button>
                             </Link>
-                        </Tooltip>
-                        <Tooltip title="My Account">
-                            <IconButton sx={{ color: "white" }} onClick={handleMenuOpen}><PiUserCircleThin /></IconButton>
-                        </Tooltip>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleMenuClose}
-                            PaperProps={{
-                                style: {
-                                    width: '250px',
-                                },
-                            }}>
-                            <div style={{ padding: '16px' }}>
-                                <Typography variant="h6">{user?.firstName} {user?.lastName}</Typography>
-                                <Typography variant="body2">{user?.email}</Typography>
-                            </div>
-                            <Link href="/account" className={styles.link}>
-                                <MenuItem onClick={handleMenuClose}>Personal Information</MenuItem>
-                            </Link>
-                            <Link href="/coming-soon" className={styles.link}>
-                                <MenuItem onClick={handleMenuClose}>Orders</MenuItem>
-                            </Link>
-                            <Link href="/coming-soon" className={styles.link}>
-                                <MenuItem onClick={handleMenuClose}>Pending Offers</MenuItem>
-                            </Link>
-                            <Link href="/coming-soon" className={styles.link}>
-                                <MenuItem onClick={handleMenuClose}>Open Application</MenuItem>
-                            </Link>
-                            <Link href="/coming-soon" className={styles.link}>
-                                <MenuItem onClick={handleMenuClose}>Inquiry Form</MenuItem>
-                            </Link>
-                            <Link href="/coming-soon" className={styles.link}>
-                                <MenuItem onClick={handleMenuClose}>Refer Friends</MenuItem>
-                            </Link>
-                            <Link href="/coming-soon" className={styles.link}>
-                                <MenuItem onClick={handleMenuClose}>My Reviews</MenuItem>
-                            </Link>
-                            <MenuItem onClick={() => logout()}>Sign Out</MenuItem>
-                        </Menu>
-                    </>
-                ) : (
-                    <>
-                        <Link href="/sign-up">
-                            <Button variant="outlined" sx={{ color: "white", borderColor: "white", textTransform: "none" }}>Register</Button>
-                        </Link>
-                        <Link href="/sign-in">
-                            <Button variant="contained" color="error" sx={{ textTransform: "none" }}>Login</Button>
-                        </Link>
-                    </>
-                )}
-            </div>
-            <div className={styles.burger}>
-                <IconButton sx={{ color: "white" }} onClick={() => setDrawerOpen(true)}>
-                    <CiMenuBurger />
-                </IconButton>
-            </div>
-
-            <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                <div className={styles.drawerContent}>
-                    <Link href="/">
-                        <Button sx={{ color: "black", textTransform: "none", borderRadius: "50px", marginBottom: "16px" }}>
-                            Home
-                        </Button>
-                    </Link>
-                    <Tooltip title="Favorable Offer">
-                        <Link href="/favorable-offer">
-                            <Button sx={{ color: "black", textTransform: "none", borderRadius: "50px", marginBottom: "16px" }}>
-                                {user?.role === "buyer" ? "Favorable Offer" : "Provide a Service"}
-                            </Button>
-                        </Link>
-                    </Tooltip>
+                        </CustomTooltip>
+                    ))}
                     {user ? (
                         <>
+                            <CustomTooltip title={headerContent.userMenu.chats}>
                                 <Link href="/chat">
-                                    <Button sx={{ color: "black", textTransform: "none", borderRadius: "50px", marginBottom: "16px" }}>
-                                        Chats
-                                    </Button>
+                                    <IconButton sx={{color: "white"}}><PiChatTeardropTextThin/></IconButton>
                                 </Link>
-                                <Button onClick={handleMenuOpen} sx={{ color: "black", textTransform: "none", borderRadius: "50px", marginBottom: "16px" }}>
-                                    Account
-                                </Button>
+                            </CustomTooltip>
+                            <CustomTooltip title={headerContent.userMenu.account}>
+                                <IconButton sx={{color: "white"}}
+                                            onClick={handleMenuOpen}><PiUserCircleThin/></IconButton>
+                            </CustomTooltip>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleMenuClose}
+                                PaperProps={{
+                                    style: {
+                                        width: '250px',
+                                    },
+                                }}>
+                                <div style={{padding: '16px'}}>
+                                    <Typography variant="h6">{user?.firstName} {user?.lastName}</Typography>
+                                    <Typography variant="body2">{user?.email}</Typography>
+                                </div>
+                                {headerContent.userMenu.menuItems.map((item) => (
+                                    <Link href={item.href} className={styles.link} key={item.href}>
+                                        <MenuItem onClick={handleMenuClose}>{item.label}</MenuItem>
+                                    </Link>
+                                ))}
+                                <MenuItem onClick={() => logout()}>{headerContent.userMenu.logout}</MenuItem>
+                            </Menu>
                         </>
                     ) : (
                         <>
                             <Link href="/sign-up">
-                                <Button variant="outlined" sx={{ color: "black", textTransform: "none", borderRadius: "50px", marginBottom: "16px" }}>
-                                    Register
+                                <Button startIcon={<LuUserPlus/>} variant="outlined"
+                                        sx={{color: "white", borderColor: "white", textTransform: "none", borderRadius: "15px", lineHeight: "1.5"}}>
+                                    {headerContent.auth.register}
                                 </Button>
                             </Link>
                             <Link href="/sign-in">
-                                <Button variant="contained" color="error" sx={{ textTransform: "none", borderRadius: "50px" }}>
-                                    Login
+                                <Button
+                                    startIcon={<LuUserRoundCheck/>}
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: "none",
+                                        borderRadius: "15px",
+                                        lineHeight: "1.5",
+                                        boxShadow: "none",
+                                        backgroundColor: "#0ABAB5",
+                                        color: "white",
+                                        "&:hover": {
+                                            backgroundColor: "#099E9A"
+                                        }
+                                    }}
+                                >
+                                    {headerContent.auth.login}
                                 </Button>
                             </Link>
                         </>
                     )}
+                </div>
+                <div className={styles.burger}>
+                    <IconButton sx={{color: "white"}} onClick={() => setDrawerOpen(true)}>
+                        <CiMenuBurger/>
+                    </IconButton>
+                </div>
+            </div>
+            <Drawer
+                anchor="left"
+                open={desktopDrawerOpen}
+                onClose={() => setDesktopDrawerOpen(false)}
+                sx={{'& .MuiDrawer-paper': {width: '30%'}, position: "relative"}}>
+                <div className={styles.buttonTimes}>
+                    <CustomTooltip title="Close Menu">
+                        <IconButton onClick={() => setDesktopDrawerOpen(false)}>
+                            <LiaTimesSolid/>
+                        </IconButton>
+                    </CustomTooltip>
+                </div>
+                <div className={styles.drawerWrapper}>
+                    <CustomTooltip title={headerContent.homeTooltip} placement="bottom" arrow>
+                        <Image className={styles.logo} src={logoDark} alt={headerContent.logoAlt} width={194} height={79}/>
+                    </CustomTooltip>
+                    <div className={styles.drawerContentDesktop}>
+                        {headerContent.drawerLinks.map((link) => (
+                            <Link href={link.href} className={styles.animatedLink} key={link.href}>
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </Drawer>
         </header>

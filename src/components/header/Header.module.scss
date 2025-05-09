@@ -10,6 +10,78 @@
   }
 }
 
+.logoMenu {
+  display: flex;
+  gap: 40px;
+}
+
+.drawerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 10% 0 0 30%;
+  justify-items: start;
+  align-content: start;
+  gap: 40px;
+  height: 100%;
+  width: 100%;
+}
+
+.drawerContentDesktop {
+  display: flex;
+  max-width: fit-content;
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: bold;
+  margin: 0 auto;
+}
+
+.buttonTimes {
+  display: flex;
+  position: absolute;
+  top: 30px;
+  left: 20%;
+  z-index: 999;
+}
+
+.animatedLink {
+  text-decoration: none;
+  color: var(--dark-grey);
+  font-size: 1.2rem;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  padding: 5px 0;
+  width: fit-content;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 50px;
+    background-color: black;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.headerInner {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
 .drawerContent {
   display: flex;
   flex-direction: column;
@@ -32,6 +104,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  height: 45px;
+  width: auto;
   cursor: pointer;
 }
 

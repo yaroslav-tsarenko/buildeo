@@ -1,9 +1,11 @@
 .footer {
   display: flex;
   width: 100%;
+  flex-direction: column;
   justify-content: space-between;
-  padding: 80px 80px;
-  border-top: 2px solid var(--grey);
+  gap: 30px;
+  align-items: center;
+  background-color: var(--light-grey);
 
   @media screen and (max-width: 1028px) {
     flex-direction: column;
@@ -14,10 +16,72 @@
   }
 }
 
+.socialWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.socials {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 1028px) {
+    gap: 10px;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  color: var(--dark-grey);
+  justify-content: center;
+  font-size: var(--size-25px);
+  padding: 10px;
+  border-radius: 50px;
+  transition: 0.1s all ease-in-out;
+
+  &:hover{
+    background: var(--light-grey);
+  }
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-items: center;
+  align-content: center;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  display: flex;
+}
+
+.copyright {
+  display: flex;
+  background: white;
+  width: 100%;
+  padding: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
 .footerNavWrapper {
   display: flex;
   gap: 75px;
   width: fit-content;
+  padding: 50px;
   justify-content: space-between;
 
   @media screen and (max-width: 1028px) {
@@ -36,12 +100,12 @@
   gap: 15px;
 
   h4 {
-    font-size: var(--size-20px);
+    font-size: var(--size-15px);
     font-weight: 700;
   }
 
   .p {
-    font-size: var(--size-20px);
+    font-size: var(--size-15px);
     font-weight: 500;
     display: flex;
     text-decoration: none;

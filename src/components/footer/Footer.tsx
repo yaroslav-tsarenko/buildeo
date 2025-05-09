@@ -1,57 +1,70 @@
+"use client";
+
 import React from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import Tooltip from '@mui/material/Tooltip';
-import { MdOutlineEmail } from "react-icons/md";
-import { RiPhoneLine } from "react-icons/ri";
 import styles from "./Footer.module.scss";
-import redLogo from "@/assets/logos/logo-red.svg";
+import blackLogo from "@/assets/logos/buildeo-logo-dark.svg";
+import { footerContent } from "@/assets/config/content";
+import { FaInstagram } from "react-icons/fa";
+import { FiFacebook } from "react-icons/fi";
+import { RiTiktokLine } from "react-icons/ri";
+import { FaLinkedin } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import {usePathname} from "next/navigation";
 
 const Footer = () => {
+
+    const pathname = usePathname();
+
+    if (['/sign-up', '/sign-in', '/sign-up-buyer'].includes(pathname)) {
+        return null;
+    }
+
+
     return (
         <footer className={styles.footer}>
-            <Tooltip title="Go Home" placement="bottom" arrow>
-                <Link href={"/"}>
-                    <Image src={redLogo} alt="Footer Logo" width={244} height={82}/>
-                </Link>
-            </Tooltip>
             <div className={styles.footerNavWrapper}>
-                <div className={styles.footerNav}>
-                    <h4>BUILDEO</h4>
-                    <Tooltip title="Imprint" placement="left">
-                        <Link href="/coming-soon" className={styles.p}>Imprint</Link>
-                    </Tooltip>
-                    <Tooltip title="Our Mission" placement="left">
-                        <Link href="/coming-soon" className={styles.p}>Our Mission</Link>
-                    </Tooltip>
-                    <Tooltip title="The BUILDEO Principal" placement="left">
-                        <Link href="/coming-soon" className={styles.p}>The BUILDEO Principal</Link>
-                    </Tooltip>
+                {footerContent.sections.map((section) => (
+                    <div className={styles.footerNav} key={section.title}>
+                        <h4>{section.title}</h4>
+                        {section.links.map((link) => (
+                            <Tooltip title={link.label} placement="left" key={link.href}>
+                                <Link href={link.href} className={styles.p}>{link.label}</Link>
+                            </Tooltip>
+                        ))}
+                    </div>
+                ))}
+            </div>
+            <div className={styles.socialWrapper}>
+                <h4>Folge Uns</h4>
+                <div className={styles.socials}>
+                    {[
+                        {icon: <FaInstagram/>, label: "Instagram", href: "https://www.instagram.com"},
+                        {icon: <FiFacebook/>, label: "Facebook", href: "https://www.facebook.com"},
+                        {icon: <RiTiktokLine/>, label: "TikTok", href: "https://www.tiktok.com"},
+                        {icon: <FaLinkedin/>, label: "LinkedIn", href: "https://www.linkedin.com"},
+                        {icon: <FaYoutube/>, label: "YouTube", href: "https://www.youtube.com"},
+                    ].map((social, index) => (
+                        <Tooltip title={social.label} key={index}>
+                            <Link href={social.href} target="_blank" rel="noopener noreferrer"
+                                  className={styles.socialLink}>
+                                {social.icon}
+                            </Link>
+                        </Tooltip>
+                    ))}
                 </div>
-                <div className={styles.footerNav}>
-                    <h4>Partnership</h4>
-                    <Tooltip title="Become a Partner" placement="left">
-                        <Link href="/coming-soon" className={styles.p}>Become a Partner</Link>
-                    </Tooltip>
-                    <Tooltip title="Privacy Statement" placement="left">
-                        <Link href="/coming-soon" className={styles.p}>Privacy Statement</Link>
-                    </Tooltip>
-                    <Tooltip title="Shipping and Payment Conditions" placement="left">
-                        <Link href="/coming-soon" className={styles.p}>Shipping and Payment Conditions</Link>
-                    </Tooltip>
-                </div>
-                <div className={styles.footerNav}>
-                    <h4>Contact Us</h4>
-                    <Tooltip title="Help Center" placement="left" >
-                        <Link href="/coming-soon" className={styles.p}>Help Center</Link>
-                    </Tooltip>
-                    <Tooltip title="Email" placement="left">
-                        <Link href="mailto:info@buildeo.de" className={styles.p}><MdOutlineEmail/>info@buildeo.de</Link>
-                    </Tooltip>
-                    <Tooltip title="Phone" placement="left">
-                        <Link href="tel:05745300560" className={styles.p}><RiPhoneLine/>05745 /300 560</Link>
-                    </Tooltip>
-                </div>
+            </div>
+            <div className={styles.logoWrapper}>
+                <Link href={"/"}>
+                    <Image src={blackLogo} alt="Footer Logo" className={styles.logo} width={155} height={55}/>
+                </Link>
+                <p>Nummer 1 auf dem Marktplatz</p>
+            </div>
+
+            <div className={styles.copyright}>
+                <p>{footerContent.copyright}</p>
             </div>
         </footer>
     );

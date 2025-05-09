@@ -52,8 +52,7 @@ const Account = () => {
                 <div className={styles.userLeft}>
                     <Avatar
                         src={preview}
-                        sx={{ width: 150, height: 150, fontSize: 20, borderRadius: "10px" }}
-                    >
+                        sx={{ width: 150, height: 150, fontSize: 20, borderRadius: "10px" }}>
                         {user?.firstName?.charAt(0).toUpperCase()}{user?.lastName?.charAt(0).toUpperCase()}
                     </Avatar>
                     <Button
