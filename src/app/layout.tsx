@@ -13,6 +13,8 @@ type RootLayoutProps = {
 };
 
 export async function generateMetadata() {
+    const ogImage = `https://${baseURL}/og?title=${encodeURIComponent("BUILDEO")}`;
+
     return {
         metadataBase: new URL(`https://${baseURL}`),
         title: "BUILDEO",
@@ -35,6 +37,18 @@ export async function generateMetadata() {
             siteName: `buildeo's Portfolio`,
             locale: "en_US",
             type: "website",
+            images: [
+                {
+                    url: ogImage,
+                    alt: "BUILDEO",
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: "BUILDEO",
+            description: "BEST services provider",
+            images: [ogImage],
         },
         robots: {
             index: true,
