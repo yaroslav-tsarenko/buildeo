@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import styles from "./AuthLayout.module.scss";
 import logo from "@/assets/logos/buildeo-logo-dark.svg";
-import {headerContent} from "@/assets/config/content";
 import Image from "next/image";
 import Link from 'next/link';
+import { headerContent } from "@/assets/config/content";
 
 interface AuthLayoutInterface {
     children: React.ReactNode;
