@@ -9,7 +9,7 @@ import { baseURL } from '@/assets/config/content';
 export async function generateMetadata() {
     const title = home.title;
     const description = home.description;
-    const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+    const ogImage = `https://buildeo.vercel.app/images/avatar.jpg`;
 
     return {
         title,
