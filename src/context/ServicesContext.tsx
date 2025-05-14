@@ -1,7 +1,9 @@
-"use client"
+"use client";
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { newRequest } from '@/utils/newRequest';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { newRequest } from "@/utils/newRequest";
+import Image from "next/image";
+import logo from "@/assets/logos/buildeo-logo-dark.svg"
 
 type Service = {
     _id: string;
@@ -21,6 +23,31 @@ type ServicesContextType = {
 
 const ServicesContext = createContext<ServicesContextType | undefined>(undefined);
 
+const styles = {
+    loaderContainer: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#f0f0f0",
+        position: "relative",
+        overflow: "hidden",
+        transition: "opacity 0.5s ease-in-out",
+    },
+    bouncingLogo: {
+        fontSize: "3rem",
+        animation: "bounce 1.5s infinite ease-in-out",
+    },
+    content: {
+        opacity: 1,
+        transition: "opacity 0.5s ease-in-out",
+    },
+    "@keyframes bounce": {
+        "0%, 100%": { transform: "translateY(0)" },
+        "50%": { transform: "translateY(-20px)" },
+    },
+};
+
 export const ServicesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [services, setServices] = useState<Service[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -28,12 +55,11 @@ export const ServicesProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     useEffect(() => {
         const fetchServices = async () => {
             setLoading(true);
-            console.log(loading)
             try {
-                const response = await newRequest.get('/service/get-all');
+                const response = await newRequest.get("/service/get-all");
                 setServices(response.data);
             } catch (error) {
-                console.error('Error fetching services:', error);
+                console.error("Error fetching services:", error);
             } finally {
                 setLoading(false);
             }
@@ -45,11 +71,13 @@ export const ServicesProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return (
         <ServicesContext.Provider value={{ services }}>
             {loading ? (
-                <div>Loading...</div>
-            ) : (
-                <div>
-                    {children}
+                <div style={styles.loaderContainer}>
+                    <div style={styles.bouncingLogo}>
+                        <Image src={logo} alt="BUILDEO" width={200} height={170} />
+                    </div>
                 </div>
+            ) : (
+                <div style={styles.content}>{children}</div>
             )}
         </ServicesContext.Provider>
     );
@@ -58,7 +86,7 @@ export const ServicesProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 export const useServices = () => {
     const context = useContext(ServicesContext);
     if (!context) {
-        throw new Error('useServices must be used within a ServicesProvider');
+        throw new Error("useServices must be used within a ServicesProvider");
     }
     return context;
 };

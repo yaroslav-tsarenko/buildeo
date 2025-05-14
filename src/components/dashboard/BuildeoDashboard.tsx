@@ -8,6 +8,11 @@ import { MdSell } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
+import Buyers from "@/components/buyers/Buyers";
+import Sellers from '../sellers/Sellers';
+import AllUsers from "@/components/all-users/AllUsers";
+import MetricsDashboard from "@/components/metrics-dashboard/MetricsDashboard";
 
 const BuildeoDashboard = () => {
     const [selectedOption, setSelectedOption] = useState('buyers');
@@ -15,14 +20,23 @@ const BuildeoDashboard = () => {
     const renderContent = () => {
         switch (selectedOption) {
             case 'buyers':
-                return <div>Buyers Content</div>;
+                return <Buyers/>;
             case 'sellers':
-                return <div>Sellers Content</div>;
+                return <Sellers/>;
             case 'allUsers':
-                return <div>All Users Content</div>;
+                return <AllUsers/>;
+            case 'dashboard':
+                return <MetricsDashboard/>;
             default:
                 return <div>Select an option to view content</div>;
         }
+    };
+
+    const logout = () => {
+        document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
     };
 
     return (
@@ -31,6 +45,11 @@ const BuildeoDashboard = () => {
                 <div className={styles.navLinksWrapper}>
                     <Image className={styles.logo} src={logo} alt="Buildeo Logo" width={174} height={59}/>
                     <div className={styles.navLinks}>
+                        <button
+                            className={`${styles.link} ${selectedOption === 'dashboard' ? styles.active : ''}`}
+                            onClick={() => setSelectedOption('dashboard')}>
+                            <MdDashboard/>Dashboard
+                        </button>
                         <button
                             className={`${styles.link} ${selectedOption === 'buyers' ? styles.active : ''}`}
                             onClick={() => setSelectedOption('buyers')}>
@@ -48,7 +67,7 @@ const BuildeoDashboard = () => {
                         </button>
                     </div>
                 </div>
-                <button className={styles.link}><IoLogOut/>Log Out</button>
+                <button className={styles.link} onClick={() => logout()}><IoLogOut/>Log Out</button>
             </aside>
             <div className={styles.content}>
                 <div className={styles.contentInner}>
