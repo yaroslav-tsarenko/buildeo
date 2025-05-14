@@ -59,10 +59,10 @@ const SignInAuth = () => {
     return (
         <form onSubmit={formik.handleSubmit} className={styles.form}>
             <h1>
-                Sign In
+                Anmelden
             </h1>
             <p>
-                Welcome back!
+                Willkommen zurück!
             </p>
             <div className={styles.grid}>
                 <div className={styles.inputDiv}>
@@ -92,16 +92,47 @@ const SignInAuth = () => {
                         <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
                 </div>
             </div>
-            <Button type="submit" loading={loading} sx={{borderRadius: "50px", width: "100%", textTransform: "none"}} color="error"
-                    variant="contained">Sign In</Button>
+            <Button
+                type="submit"
+                loading={loading}
+                sx={{
+                    borderRadius: "50px",
+                    width: "100%",
+                    color: "black",
+                    boxShadow: "none",
+                    textTransform: "none",
+                    backgroundColor: "#00fdce",
+                    "&:hover": {
+                        backgroundColor: "#00e6b8"
+                    }
+                }}
+                variant="contained"
+            >
+                Sign In
+            </Button>
             <div className={styles.separator}>
                 <hr/>
                 <span>Already have an account?</span>
                 <hr/>
             </div>
             <Link href="/sign-up" className={styles.link}>
-                <Button sx={{borderRadius: "50px", textDecoration: "none", width: "100%", textTransform: "none"}} color="error"
-                        variant="outlined">Sign Up</Button>
+                <Button
+                    sx={{
+                        borderRadius: "50px",
+                        width: "100%",
+                        textDecoration: "none",
+                        textTransform: "none",
+                        color: "#333333",
+                        borderColor: "#00fdce",
+                        "&:hover": {
+                            backgroundColor: "rgba(0, 253, 206, 0.1)",
+                            borderColor: "#00e6b8",
+                        },
+                    }}
+                    variant="outlined"
+                >
+                    Sign Up
+                </Button>
             </Link>
         </form>
     );
