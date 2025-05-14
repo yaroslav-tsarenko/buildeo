@@ -1,10 +1,8 @@
 import React from 'react';
-import Benefits from '@/sections/benefits/Benefits';
-import NumberOneAtMarket from "@/sections/number-one-at-market/NumberOneAtMarket";
-import RatePropertySection from "@/sections/rate-property/RatePropertySection";
-import Main from "@/sections/main/Main";
-import { home } from '@/assets/config/content';
-import { baseURL } from '@/assets/config/content';
+import {home} from '@/assets/config/content';
+import {baseURL} from '@/assets/config/content';
+import {useUser} from '@/context/UserContext';
+import MainPage from "@/sections/main-page/MainPage";
 
 export async function generateMetadata() {
     const title = home.title;
@@ -39,12 +37,11 @@ export async function generateMetadata() {
 
 
 const Page = () => {
+
+
     return (
         <>
-            <Main/>
-            <Benefits/>
-            <RatePropertySection/>
-            <NumberOneAtMarket/>
+           <MainPage/>
         </>
     );
 };

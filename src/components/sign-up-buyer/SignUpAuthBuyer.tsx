@@ -67,10 +67,11 @@ const SignUpAuth = () => {
     return (
         <form onSubmit={formik.handleSubmit} className={styles.form}>
             <h1>
-                Register As Buyer
+                Als Käufer registrieren
             </h1>
             <p>
-                Want to register in another role? <Link href="/sign-up">Register as Seller</Link>
+                Möchten Sie sich in einer anderen Rolle registrieren? <Link href="/sign-up">Als Verkäufer
+                registrieren</Link>
             </p>
             <div className={styles.grid}>
                 <div className={styles.inputDiv}>
@@ -191,16 +192,47 @@ const SignUpAuth = () => {
                         <div style={{color: 'red'}}>{formik.errors.longitude}</div> : null}
                 </div>
             </div>
-            <Button type="submit" loading={loading} sx={{borderRadius: "50px", width: "100%", textTransform: "none"}} color="error"
-                    variant="contained">Sign Up</Button>
+            <Button
+                type="submit"
+                loading={loading}
+                sx={{
+                    borderRadius: "50px",
+                    width: "100%",
+                    color: "black",
+                    boxShadow: "none",
+                    textTransform: "none",
+                    backgroundColor: "#00fdce",
+                    "&:hover": {
+                        backgroundColor: "#00e6b8"
+                    }
+                }}
+                variant="contained"
+            >
+                Sign Up
+            </Button>
             <div className={styles.separator}>
                 <hr/>
                 <span>Already have an account?</span>
                 <hr/>
             </div>
             <Link href="/sign-in" className={styles.link}>
-                <Button sx={{borderRadius: "50px", width: "100%", textDecoration: "none", textTransform: "none"}} color="error"
-                        variant="outlined">Sign In</Button>
+                <Button
+                    sx={{
+                        borderRadius: "50px",
+                        width: "100%",
+                        textDecoration: "none",
+                        textTransform: "none",
+                        color: "#333333",
+                        borderColor: "#00fdce",
+                        "&:hover": {
+                            backgroundColor: "rgba(0, 253, 206, 0.1)",
+                            borderColor: "#00e6b8",
+                        },
+                    }}
+                    variant="outlined"
+                >
+                    Sign In
+                </Button>
             </Link>
         </form>
     );
