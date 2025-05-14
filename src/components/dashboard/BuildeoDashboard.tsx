@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import styles from "./BuildeoDashboard.module.scss";
 import Image from "next/image";
