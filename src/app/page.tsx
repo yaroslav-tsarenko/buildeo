@@ -1,7 +1,6 @@
 import React from 'react';
 import {home} from '@/assets/config/content';
 import {baseURL} from '@/assets/config/content';
-import {useUser} from '@/context/UserContext';
 import MainPage from "@/sections/main-page/MainPage";
 
 export async function generateMetadata() {

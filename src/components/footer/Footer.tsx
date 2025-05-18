@@ -12,16 +12,17 @@ import { FiFacebook } from "react-icons/fi";
 import { RiTiktokLine } from "react-icons/ri";
 import { FaLinkedin } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useUser } from '@/context/UserContext';
 
 const Footer = () => {
-
     const pathname = usePathname();
+    const user = useUser();
+    const userRole = user?.role;
 
-    if (['/sign-up', '/sign-in', '/sign-up-buyer'].includes(pathname)) {
+    if (['/sign-up', '/sign-in', '/sign-up-buyer'].includes(pathname) || userRole === 'admin') {
         return null;
     }
-
 
     return (
         <footer className={styles.footer}>
@@ -41,15 +42,14 @@ const Footer = () => {
                 <h4>Folge Uns</h4>
                 <div className={styles.socials}>
                     {[
-                        {icon: <FaInstagram/>, label: "Instagram", href: "https://www.instagram.com"},
-                        {icon: <FiFacebook/>, label: "Facebook", href: "https://www.facebook.com"},
-                        {icon: <RiTiktokLine/>, label: "TikTok", href: "https://www.tiktok.com"},
-                        {icon: <FaLinkedin/>, label: "LinkedIn", href: "https://www.linkedin.com"},
-                        {icon: <FaYoutube/>, label: "YouTube", href: "https://www.youtube.com"},
+                        { icon: <FaInstagram />, label: "Instagram", href: "https://www.instagram.com" },
+                        { icon: <FiFacebook />, label: "Facebook", href: "https://www.facebook.com" },
+                        { icon: <RiTiktokLine />, label: "TikTok", href: "https://www.tiktok.com" },
+                        { icon: <FaLinkedin />, label: "LinkedIn", href: "https://www.linkedin.com" },
+                        { icon: <FaYoutube />, label: "YouTube", href: "https://www.youtube.com" },
                     ].map((social, index) => (
                         <Tooltip title={social.label} key={index}>
-                            <Link href={social.href} target="_blank" rel="noopener noreferrer"
-                                  className={styles.socialLink}>
+                            <Link href={social.href} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                                 {social.icon}
                             </Link>
                         </Tooltip>
@@ -58,7 +58,7 @@ const Footer = () => {
             </div>
             <div className={styles.logoWrapper}>
                 <Link href={"/"}>
-                    <Image src={blackLogo} alt="Footer Logo" className={styles.logo} width={155} height={55}/>
+                    <Image src={blackLogo} alt="Footer Logo" className={styles.logo} width={155} height={55} />
                 </Link>
                 <p>Nummer 1 auf dem Marktplatz</p>
             </div>
