@@ -38,12 +38,11 @@ const SignInAuth = () => {
                     if (user?.role === "admin") {
                         navigate("/admin")
                     } else {
-                        navigate("/main")
+                        navigate("/")
                     }
                 }, 1500)
             } catch (error: unknown) {
                 console.error('Error logging in:', error);
-
                 if (error instanceof Error && typeof error === 'object' && error !== null) {
                     const axiosError = error as { response?: { data?: { error?: string } } };
                     const errorMessage = axiosError.response?.data?.error || 'Error logging in';
@@ -129,8 +128,7 @@ const SignInAuth = () => {
                             borderColor: "#00e6b8",
                         },
                     }}
-                    variant="outlined"
-                >
+                    variant="outlined">
                     Sign Up
                 </Button>
             </Link>

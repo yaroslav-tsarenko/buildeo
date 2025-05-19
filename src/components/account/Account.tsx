@@ -58,9 +58,8 @@ const Account = () => {
                     <Button
                         variant="contained"
                         color="error"
-                        sx={{ marginTop: 2, borderRadius: "50px" }}
-                        component="label"
-                    >
+                        sx={{ marginTop: 2,  borderRadius: "10px", backgroundColor: "#00ffd0", color: "black" }}
+                        component="label">
                         Change Profile Picture
                         <input
                             type="file"
@@ -99,13 +98,42 @@ const Account = () => {
                             color="error"
                             sx={{
                                 textTransform: "none",
-                                borderRadius: "50px",
+                                borderRadius: "10px",
                                 padding: "10px 30px",
                                 fontSize: "15px",
                                 maxWidth: "350px",
                                 width: "100%",
+                                backgroundColor: "#00ffd0",
+                                color: "black"
                             }}>
                             {user?.role === "buyer" ? "Add Offer" : "Create own Service"}
+                        </Button>
+                    </Link>
+                </div>
+                <h2>Your Properties List</h2>
+                <div className={styles.bannerProperty}>
+                    <div className={styles.descriptionProperty}>
+                        <h3>
+                           Sell your property fast
+                        </h3>
+                        <p>
+                            Sell your property fast and easy with our platform. Just create your own service and wait for a buyer to call you
+                        </p>
+                    </div>
+                    <Link href="/sell-property">
+                        <Button
+                            variant="contained"
+                            sx={{
+                                textTransform: "none",
+                                borderRadius: "10px",
+                                padding: "10px 30px",
+                                fontSize: "15px",
+                                color: "black",
+                                maxWidth: "350px",
+                                width: "100%",
+                                backgroundColor: "#00ffd0",
+                            }}>
+                            Sell your property
                         </Button>
                     </Link>
                 </div>
@@ -125,6 +153,25 @@ const Account = () => {
                             ))
                         ) : (
                             "Currently your Service list is empty"
+                        )}
+                    </div>
+                </div>
+                <div className={styles.servicesWrapper}>
+                    <h2>Your Properties</h2>
+                    <div className={styles.services}>
+                        {user?.role === "buyer" ? (
+                            "Currently your Offer list is empty"
+                        ) : userServices.length > 0 ? (
+                            userServices.map((service) => (
+                                <ProductCard
+                                    key={service._id}
+                                    title={service.title || "No title available"}
+                                    price={service.price}
+                                    serviceId={service._id}
+                                    image={service.photo || ""}/>
+                            ))
+                        ) : (
+                            "Currently your Property list is empty"
                         )}
                     </div>
                 </div>

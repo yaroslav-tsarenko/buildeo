@@ -12,7 +12,7 @@ import { newRequest } from "@/utils/newRequest";
 import { useAlert } from "@/context/AlertContext";
 import { useUser } from "@/context/UserContext";
 import {navigate} from "@/constants/handleNav";
-export const dynamic = "force-dynamic";
+
 const FavorableOffer = () => {
     const [files, setFiles] = useState<File[]>([]);
     const [isDragging, setIsDragging] = useState(false);
@@ -197,7 +197,16 @@ const FavorableOffer = () => {
                         <MdOutlineFileUpload className={styles.icon} size={50} />
                         <p>Drag and drop your files here</p>
                         <p>or</p>
-                        <Button variant="contained" component="label" color="error" sx={{ textTransform: 'none', borderRadius: "50px" }}>
+                        <Button
+                            variant="contained"
+                            component="label"
+                            color="error"
+                            sx={{
+                                textTransform: 'none',
+                                borderRadius: "50px",
+                                backgroundColor: "#00ffd0",
+                            }}
+                        >
                             Browse File
                             <input type="file" hidden onChange={handleFileChange} multiple />
                         </Button>
