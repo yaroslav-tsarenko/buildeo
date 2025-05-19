@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { newRequest } from "@/utils/newRequest";
 import Image from "next/image";
+import { CSSProperties } from "react";
 import logo from "@/assets/logos/buildeo-logo-dark.svg"
 
 type Service = {
@@ -23,7 +24,7 @@ type ServicesContextType = {
 
 const ServicesContext = createContext<ServicesContextType | undefined>(undefined);
 
-const styles = {
+const styles: { [key: string]: CSSProperties } = {
     loaderContainer: {
         display: "flex",
         justifyContent: "center",
@@ -41,11 +42,7 @@ const styles = {
     content: {
         opacity: 1,
         transition: "opacity 0.5s ease-in-out",
-    },
-    "@keyframes bounce": {
-        "0%, 100%": { transform: "translateY(0)" },
-        "50%": { transform: "translateY(-20px)" },
-    },
+    }
 };
 
 export const ServicesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
