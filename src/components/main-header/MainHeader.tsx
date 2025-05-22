@@ -16,10 +16,12 @@ import {headerContent} from "@/assets/config/content";
 import {RxHamburgerMenu} from "react-icons/rx";
 import {LiaTimesSolid} from "react-icons/lia";
 import logoDark from "@/assets/logos/buildeo-logo-dark.svg";
+import { useServices } from '@/context/ServicesContext';
 
 const MainHeader = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const user = useUser();
+    const { services } = useServices();
     const pathname = usePathname();
     const [inputValue, setInputValue] = useState("");
     const router = useRouter();
@@ -38,6 +40,8 @@ const MainHeader = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const serviceOptions = services.map((service) => service.title);
 
     if (['/sign-up', '/sign-in', '/sign-up-buyer'].includes(pathname)) {
         return null;
@@ -91,7 +95,7 @@ const MainHeader = () => {
                         <div className={styles.searchbar}>
                             <Autocomplete
                                 placeholder="Painter, Plumber, Electrician..."
-                                options={["Lol"]}
+                                options={serviceOptions}
                                 value={inputValue}
                                 onChange={(event, newValue) => handleSelect(newValue)}
                                 onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
@@ -101,7 +105,8 @@ const MainHeader = () => {
                                         router.push("/services");
                                     }
                                 }}
-                                sx={{width: 500, height: 40}}/>
+                                sx={{ width: 500, height: 40 }}
+                            />
                         </div>
                         <div className={styles.burger}>
                             <IconButton sx={{color: "black"}} onClick={() => setDrawerOpen(true)}>
@@ -109,18 +114,30 @@ const MainHeader = () => {
                             </IconButton>
                         </div>
                         <div className={styles.nav}>
-                            <Tooltip title="Home Page">
+                            <Tooltip title="Startseite">
                                 <Link href="/">
                                     <Button
-                                        sx={{color: "black", textTransform: "none", borderRadius: "50px"}}>Home</Button>
+                                        sx={{color: "black", textTransform: "none", borderRadius: "50px"}}>Startseite</Button>
                                 </Link>
                             </Tooltip>
-                            <Tooltip title="Favorable Offer">
-                                <Link href="/favorable-offer">
-                                    <Button sx={{color: "black", textTransform: "none", borderRadius: "50px"}}>
-                                        {user?.role === "buyer" ? "Favorable Offer" : "Provide a Service"}</Button>
-                                </Link>
-                            </Tooltip>
+                            {user?.role === "seller" && (
+                                <>
+                                    <Tooltip title="Verkaufen Sie Ihre Immobilie">
+                                        <Link href="/sell-property">
+                                            <Button sx={{color: "black", textTransform: "none", borderRadius: "50px"}}>
+                                                Immobilie verkaufen
+                                            </Button>
+                                        </Link>
+                                    </Tooltip>
+                                    <Tooltip title="Günstiges Angebot">
+                                        <Link href="/favorable-offer">
+                                            <Button sx={{color: "black", textTransform: "none", borderRadius: "50px"}}>
+                                                Einen Service anbieten
+                                            </Button>
+                                        </Link>
+                                    </Tooltip>
+                                </>
+                            )}
                             {user ?
                                 <>
                                     <Tooltip title="My Chats">
