@@ -5,15 +5,26 @@ import {useFormik} from "formik";
 import * as Yup from "yup";
 import {newRequest} from "@/utils/newRequest";
 import {Button, Input, Textarea, Select, Option} from "@mui/joy";
-import styles from "./SellProperty.module.scss"
+import styles from "./SellProperty.module.scss";
 import {MdOutlineFileUpload} from "react-icons/md";
 
 const SellProperty = () => {
-
     const [loading, setLoading] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
-
+    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     console.log(setIsDragging);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFiles = event.target.files;
+        if (selectedFiles && selectedFiles.length > 0) {
+            const filesArray = Array.from(selectedFiles);
+            formik.setFieldValue("photos", filesArray);
+
+            const previews = filesArray.map((file) => URL.createObjectURL(file));
+            setImagePreviews(previews);
+        }
+    };
+
     const formik = useFormik({
         initialValues: {
             title: "",
@@ -21,7 +32,7 @@ const SellProperty = () => {
             price: "",
             type: "",
             location: "",
-            photo: null,
+            photos: [], // Updated to include photos as an array
         },
         validationSchema: Yup.object({
             title: Yup.string().required("Title is required"),
@@ -29,7 +40,7 @@ const SellProperty = () => {
             price: Yup.number().required("Price is required").positive().integer(),
             type: Yup.string().required("Type is required"),
             location: Yup.string().required("Location is required"),
-            photo: Yup.mixed().required("Photo is required"),
+            photos: Yup.array().of(Yup.mixed()).min(1, "At least one photo is required"), // Validate photos as an array
         }),
         onSubmit: async (values) => {
             setLoading(true);
@@ -39,8 +50,11 @@ const SellProperty = () => {
             formData.append("price", values.price.toString());
             formData.append("type", values.type);
             formData.append("location", values.location);
-            if (values.photo) {
-                formData.append("photo", values.photo);
+
+            if (values.photos && Array.isArray(values.photos)) {
+                values.photos.forEach((file: File) => {
+                    formData.append("photos", file);
+                });
             }
 
             try {
@@ -58,19 +72,12 @@ const SellProperty = () => {
         },
     });
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFiles = event.target.files;
-        if (selectedFiles && selectedFiles.length > 0) {
-            formik.setFieldValue("photo", selectedFiles[0]);
-        }
-    };
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.inner}>
                 <div className={styles.titles}>
                     <h2>Sell your property fast</h2>
-                    <p>Just add a some fields to sell your property</p>
+                    <p>Just add some fields to sell your property</p>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     <Input
@@ -81,8 +88,9 @@ const SellProperty = () => {
                         name="title"
                         sx={{width: "100%", marginBottom: "16px"}}
                     />
-                    {formik.touched.title && formik.errors.title &&
-                        <div style={{color: "red"}}>{formik.errors.title}</div>}
+                    {formik.touched.title && formik.errors.title && (
+                        <div style={{color: "red"}}>{formik.errors.title}</div>
+                    )}
                     <Textarea
                         placeholder="Description"
                         value={formik.values.description}
@@ -104,8 +112,9 @@ const SellProperty = () => {
                         name="price"
                         sx={{width: "100%", marginBottom: "16px"}}
                     />
-                    {formik.touched.price && formik.errors.price &&
-                        <div style={{color: "red"}}>{formik.errors.price}</div>}
+                    {formik.touched.price && formik.errors.price && (
+                        <div style={{color: "red"}}>{formik.errors.price}</div>
+                    )}
                     <Select
                         value={formik.values.type}
                         onChange={(event, newValue) => formik.setFieldValue("type", newValue)}
@@ -120,8 +129,9 @@ const SellProperty = () => {
                         <Option value="commercial">Commercial</Option>
                         <Option value="industrial">Industrial</Option>
                     </Select>
-                    {formik.touched.type && formik.errors.type &&
-                        <div style={{color: "red"}}>{formik.errors.type}</div>}
+                    {formik.touched.type && formik.errors.type && (
+                        <div style={{color: "red"}}>{formik.errors.type}</div>
+                    )}
                     <Input
                         placeholder="Location"
                         value={formik.values.location}
@@ -133,32 +143,67 @@ const SellProperty = () => {
                     {formik.touched.location && formik.errors.location && (
                         <div style={{color: "red"}}>{formik.errors.location}</div>
                     )}
-                    <div
-                        className={`${styles.dashedBorder} ${isDragging ? styles.dragging : ''}`}>
+                    <div className={`${styles.dashedBorder} ${isDragging ? styles.dragging : ""}`}>
                         <MdOutlineFileUpload className={styles.icon} size={50}/>
                         <p>Drag and drop your files here</p>
                         <p>or</p>
-                        <Button variant="solid" component="label" color="danger"
-                                sx={{ textTransform: 'none', borderRadius: "50px" }}>
+                        <Button
+                            variant="solid"
+                            component="label"
+                            sx={{
+                                textTransform: "none",
+                                backgroundColor: "#00ffd0",
+                                borderRadius: "50px",
+                                color: "black",
+                                transition: "all 0.3s ease",
+                                "&:hover": {
+                                    backgroundColor: "#00e6b8",
+                                    color: "white",
+                                    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+                                    transform: "scale(1.05)",
+                                },
+                            }}
+                        >
                             Browse File
-                            <input type="file" hidden onChange={handleFileChange} multiple />
+                            <input type="file" hidden onChange={handleFileChange} multiple/>
                         </Button>
                     </div>
-                    {formik.touched.photo && formik.errors.photo ? (
-                        <div style={{color: 'red'}}>{formik.errors.photo}</div>
-                    ) : null}
-                    {formik.touched.photo && formik.errors.photo &&
-                        <div style={{color: "red"}}>{formik.errors.photo}</div>}
+                    {formik.touched.photos && formik.errors.photos && (
+                        <div style={{color: "red"}}>{formik.errors.photos}</div>
+                    )}
+                    {imagePreviews.length > 0 && (
+                        <div className={styles.previewContainer}>
+                            {imagePreviews.map((src, index) => (
+                                <div key={index} className={styles.previewItem}>
+                                    <img src={src} alt={`preview-${index}`} className={styles.previewImage}/>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            const newFiles = [...(formik.values.photos || [])];
+                                            const newPreviews = [...imagePreviews];
+                                            newFiles.splice(index, 1);
+                                            newPreviews.splice(index, 1);
+                                            formik.setFieldValue("photos", newFiles);
+                                            setImagePreviews(newPreviews);
+                                        }}
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                     <Button
                         type="submit"
                         variant="solid"
                         disabled={loading}
                         sx={{
-                            textTransform: 'none',
+                            textTransform: "none",
                             borderRadius: "10px",
                             marginTop: "10px",
+                            color: "black",
                             backgroundColor: "#00ffd0",
-                            '&:hover': {
+                            "&:hover": {
                                 backgroundColor: "#00e6b8",
                             },
                         }}

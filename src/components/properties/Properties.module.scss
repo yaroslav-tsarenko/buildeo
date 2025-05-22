@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 5% 0;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0 0 15px 0;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

@@ -17,6 +17,40 @@
   }
 }
 
+.previewContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.previewItem {
+  position: relative;
+}
+
+.previewImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.previewItem button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+
 .titles{
   display: flex;
   flex-direction: column;
@@ -40,7 +74,7 @@
   align-items: center;
 
   &:hover{
-    background-color: #ffdcdc;
+    background-color: rgba(183, 250, 236, 0.5);
   }
 }
 

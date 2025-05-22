@@ -216,7 +216,19 @@ const FavorableOffer = () => {
                     ) : null}
                     <div className={styles.navButtons}>
                         <Link className={styles.link} href="/account">
-                            <Button variant="outlined" color="error" sx={{ borderRadius: "50px", textTransform: "none" }}>
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    borderRadius: "50px",
+                                    textTransform: "none",
+                                    color: "#000000",
+                                    borderColor: "#00ffd0",
+                                    '&:hover': {
+                                        backgroundColor: "#00e6b8",
+                                        borderColor: "#00e6b8",
+                                    },
+                                }}
+                            >
                                 Cancel
                             </Button>
                         </Link>
@@ -224,8 +236,16 @@ const FavorableOffer = () => {
                             type="submit"
                             loading={loading}
                             variant="contained"
-                            color="error"
-                            sx={{ borderRadius: "50px", textTransform: "none" }}>
+                            sx={{
+                                borderRadius: "50px",
+                                textTransform: "none",
+                                backgroundColor: "#00ffd0",
+                                color: "#000000", // Dark font color
+                                '&:hover': {
+                                    backgroundColor: "#00e6b8",
+                                },
+                            }}
+                        >
                             {user?.role === "buyer" ? "Add an Offer" : "Provide a Service"}
                         </Button>
                     </div>
