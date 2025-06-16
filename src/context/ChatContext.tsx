@@ -10,6 +10,8 @@ interface Chat {
     messages: { sender: string; text: string; createdAt: string }[];
     sellerAvatar?: string;
     buyerAvatar?: string;
+    sellerFullName: string;
+    buyerFullName: string;
 }
 
 interface ChatContextProps {

@@ -36,8 +36,6 @@ export async function generateMetadata() {
 
 
 const Page = () => {
-
-
     return (
         <>
            <MainPage/>

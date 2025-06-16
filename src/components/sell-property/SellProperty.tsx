@@ -7,9 +7,11 @@ import {newRequest} from "@/utils/newRequest";
 import {Button, Input, Textarea, Select, Option} from "@mui/joy";
 import styles from "./SellProperty.module.scss";
 import {MdOutlineFileUpload} from "react-icons/md";
+import {useUser} from "@/context/UserContext";
 
 const SellProperty = () => {
     const [loading, setLoading] = useState(false);
+    const user = useUser();
     const [isDragging, setIsDragging] = useState(false);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     console.log(setIsDragging);
@@ -32,7 +34,7 @@ const SellProperty = () => {
             price: "",
             type: "",
             location: "",
-            photos: [], // Updated to include photos as an array
+            photos: [],
         },
         validationSchema: Yup.object({
             title: Yup.string().required("Title is required"),
@@ -46,6 +48,7 @@ const SellProperty = () => {
             setLoading(true);
             const formData = new FormData();
             formData.append("title", values.title);
+            formData.append("userId", user?._id || '');
             formData.append("description", values.description);
             formData.append("price", values.price.toString());
             formData.append("type", values.type);
@@ -63,6 +66,7 @@ const SellProperty = () => {
                 });
                 console.log("Property created successfully:", response.data);
                 alert("Property created successfully!");
+                window.location.href = "/properties";
             } catch (error) {
                 console.error("Error creating property:", error);
                 alert("Error creating property");

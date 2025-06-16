@@ -3,14 +3,6 @@
   height: 80vh;
 }
 
-.inner{
-  display: flex;
-  max-width: 1440px;
-  gap: 10px;
-  width: 100%;
-  margin: 0 auto;
-}
-
 .chatList {
   width: 30%;
   border-right: 1px solid #ccc;
@@ -19,6 +11,9 @@
 }
 
 .chatItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid #eee;
@@ -45,13 +40,40 @@
   flex-grow: 1;
   overflow-y: auto;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messageWrapper {
+  display: flex;
+  max-width: 70%;
+}
+
+.messageLeft {
+  justify-content: flex-start;
+}
+
+.messageRight {
+  justify-content: flex-end;
+  align-self: flex-end;
 }
 
 .message {
-  padding: 5px;
-  margin: 5px 0;
   background-color: #f1f1f1;
-  border-radius: 5px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  max-width: 100%;
+  word-wrap: break-word;
+  position: relative;
+  background-color: #dff9fb;
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  text-align: right;
+  color: #888;
+  margin-top: 4px;
 }
 
 .inputWrapper {
