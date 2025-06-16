@@ -10,7 +10,6 @@ import { Button, IconButton, Menu, MenuItem, Typography, Drawer } from "@mui/mat
 import { PiChatTeardropTextThin, PiUserCircleThin } from "react-icons/pi";
 import { useUser } from "@/context/UserContext";
 import Link from "next/link";
-import { CiMenuBurger } from "react-icons/ci";
 import { LiaTimesSolid } from "react-icons/lia";
 import { RxHamburgerMenu } from "react-icons/rx";
 import CustomTooltip from '../toolltip/CustomTooltip';
@@ -27,7 +26,7 @@ const Header = () => {
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
-        console.log(drawerOpen)
+        console.log(drawerOpen || setDrawerOpen)
     };
 
     const handleMenuClose = () => {
@@ -134,17 +133,12 @@ const Header = () => {
                         </>
                     )}
                 </div>
-                <div className={styles.burger}>
-                    <IconButton sx={{color: "white"}} onClick={() => setDrawerOpen(true)}>
-                        <CiMenuBurger/>
-                    </IconButton>
-                </div>
             </div>
             <Drawer
                 anchor="left"
                 open={desktopDrawerOpen}
                 onClose={() => setDesktopDrawerOpen(false)}
-                sx={{'& .MuiDrawer-paper': {width: '30%'}, position: "relative"}}>
+                sx={{'& .MuiDrawer-paper': {width: "350px"}, position: "relative"}}>
                 <div className={styles.buttonTimes}>
                     <CustomTooltip title="Close Menu">
                         <IconButton onClick={() => setDesktopDrawerOpen(false)}>

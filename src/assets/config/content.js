@@ -362,12 +362,12 @@ export const headerContent = {
         login: "Anmelden",
     },
     drawerLinks: [
-        {href: "/suchen", label: "Suchen"},
-        {href: "/verkaufen", label: "Verkaufen"},
-        {href: "/vermieten", label: "Vermieten"},
-        {href: "/modernisieren", label: "Modernisieren"},
-        {href: "/finanzieren", label: "Finanzieren"},
-        {href: "/umziehen", label: "Umziehen"},
+        {href: "/properties", label: "Suchen"},
+        {href: "/sell-property", label: "Verkaufen"},
+        {href: "/coming-soon", label: "Vermieten"},
+        {href: "/coming-soon", label: "Modernisieren"},
+        {href: "/coming-soon", label: "Finanzieren"},
+        {href: "/properties", label: "Umziehen"},
     ],
 };
 

@@ -1,17 +1,21 @@
 "use client";
 
 import React from "react";
-import { Grid } from "@mui/material";
 import styles from "./Properties.module.scss";
-import { useProperties } from "@/context/PropertyContext";
+import {useProperties} from "@/context/PropertyContext";
 import Card from "@mui/joy/Card";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
+import Link from "next/link";
 
 const PropertiesPage = () => {
-    const { properties } = useProperties();
+    const {properties} = useProperties();
+
+    const handleCardClick = (propertyId: string) => {
+        localStorage.setItem("propertyId", propertyId);
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -20,10 +24,20 @@ const PropertiesPage = () => {
                     <h2>Find Best Properties</h2>
                     <p>With Best prices</p>
                 </div>
-                <Grid container spacing={3}>
+                <div className={styles.propertiesContent}>
                     {properties.map((property) => (
-                        <div className={styles.grid} key={property._id}>
-                            <Card sx={{minHeight: "280px", width: 320}}>
+                        <Link key={property._id} onClick={() => handleCardClick(property._id)} href="/property">
+                            <Card
+                                sx={{
+                                    minHeight: "280px",
+                                    width: 320,
+                                    cursor: "pointer",
+                                    transition: "transform 0.2s cubic-bezier(.4,2,.6,1)",
+                                    '&:hover': {
+                                        transform: 'scale(1.04)',
+                                        zIndex: 2,
+                                    },
+                                }}>
                                 <CardCover>
                                     <img
                                         src={property.photos[0] || "/placeholder.jpg"}
@@ -44,12 +58,14 @@ const PropertiesPage = () => {
                                     <Typography
                                         startDecorator={<LocationOnRoundedIcon/>}
                                         textColor="neutral.300">
+                                        {property.location}
                                     </Typography>
                                 </CardContent>
                             </Card>
-                        </div>
+                        </Link>
+
                     ))}
-                </Grid>
+                </div>
             </div>
         </div>
     );

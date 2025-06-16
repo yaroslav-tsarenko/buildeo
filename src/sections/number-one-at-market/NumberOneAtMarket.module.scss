@@ -19,6 +19,13 @@
   align-content: center;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1028px) {
+    flex-direction: column;
+  }
+}
+
+.grid{
 }
 
 .leftSide {
@@ -41,6 +48,11 @@
     color: var(--dark-grey);
     margin: 0;
   }
+
+  @media screen and (max-width: 1028px) {
+    border-radius: 20px;
+    width: 90%;
+  }
 }
 
 
@@ -50,9 +62,18 @@
   height: auto;
   flex-direction: column;
   border-radius: 0 25px 25px 0;
+
+  @media screen and (max-width: 1028px) {
+    border-radius: 20px;
+    width: 90%;
+  }
 }
 
 .video {
   display: flex;
   border-radius: 0 25px 25px 0;
+
+  @media screen and (max-width: 1028px) {
+    border-radius: 20px;
+  }
 }

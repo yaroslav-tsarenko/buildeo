@@ -19,7 +19,16 @@
   margin: 0 0 15px 0;
 }
 
-.grid{
+.grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.propertiesContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
 }
