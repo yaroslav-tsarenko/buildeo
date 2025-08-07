@@ -177,7 +177,6 @@ const PropertiesPage = () => {
                                 </Select>
                             </FormControl>
                         </div>
-
                         <div className={styles.filterSection}>
                             <Typography >Zimmer</Typography>
                             <FormControl fullWidth>
@@ -309,7 +308,7 @@ const PropertiesPage = () => {
                             frameBorder="0"
                             style={{ border: 0 }}
                             referrerPolicy="no-referrer-when-downgrade"
-                            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM&q=${encodeURIComponent(selectedProperty.location)}`}
+                            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=${encodeURIComponent(selectedProperty.location)}`}
                             allowFullScreen
                         ></iframe>
                     </Box>
