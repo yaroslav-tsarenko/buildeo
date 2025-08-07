@@ -1,5 +1,3 @@
-"use client"
-
 import React from 'react';
 import {home} from '@/assets/config/content';
 import {baseURL} from '@/assets/config/content';

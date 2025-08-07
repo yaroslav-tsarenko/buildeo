@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import "./globals.css";
 import Footer from "@/components/footer/Footer";
 import React from "react";
