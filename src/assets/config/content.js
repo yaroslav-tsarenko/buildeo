@@ -48,14 +48,14 @@ const social = [
 ];
 
 const home = {
-    label: "Home",
-    title: `${person.name}'s Portfolio`,
-    description: `A portfolio website showcasing my work as a ${person.role}`,
-    headline: <>Full-Stack Developer Creating High-Performance Web Apps</>,
+    label: "Startseite",
+    title: "Buildeo - Hauptseite",
+    description: "Buildeo - Ihre Plattform für Immobilien, Bauprojekte und Dienstleistungen",
+    headline: <>Buildeo – Ihr Marktplatz für Immobilien, Bauleistungen und innovative Services</>,
     subline: (
         <>
-            I&aposm Yaroslav Tsarenko, a Full-Stack Developer who bring interfaces to life
-            <br /> using modern tools like Next, React, TypeScript, and Tailwind. In my free time, I craft side projects to sharpen my skills.
+            Willkommen bei Buildeo – wir verbinden Eigentümer, Bauherren und Dienstleister auf einer modernen Plattform.
+            <br /> Entdecken Sie attraktive Immobilienangebote, smarte Tools und professionelle Unterstützung für Ihr nächstes Projekt.
         </>
     ),
 };
@@ -364,9 +364,7 @@ export const headerContent = {
     drawerLinks: [
         {href: "/properties", label: "Suchen"},
         {href: "/sell-property", label: "Verkaufen"},
-        {href: "/coming-soon", label: "Vermieten"},
-        {href: "/coming-soon", label: "Modernisieren"},
-        {href: "/coming-soon", label: "Finanzieren"},
+        {href: "/vermieten", label: "Vermieten"},
         {href: "/properties", label: "Umziehen"},
     ],
 };
@@ -380,54 +378,45 @@ export const heroContent = {
 export const footerContent = {
     sections: [
         {
-            title: "Über Buildeo",
+            title: "Product",
             links: [
-                { label: "Über uns", href: "/coming-soon" },
-                { label: "Karriere", href: "/coming-soon" },
-                { label: "Sitemap", href: "/coming-soon" },
-                { label: "Impressum", href: "/coming-soon" },
+                { label: "AGB & Rechtliche Hinweise", href: "/agb_and_rechtliche_hinweise" },
+                { label: "Cookie-Richtlinie", href: "/cookie-richtlinie" },
+                { label: "Datenschutz", href: "/datenschutz" },
             ],
         },
         {
-            title: "Services",
+            title: "About",
             links: [
-                { label: "Kontakt & Hilfe", href: "/coming-soon" },
-                { label: "Presseservice", href: "/coming-soon" },
-                { label: "Newsletter abonnieren", href: "/coming-soon" },
-                { label: "Verträge hier kündigen", href: "/coming-soon" },
+                { label: "Über uns", href: "/uber-uns" },
+                { label: "Blog", href: "/blog" },
             ],
         },
         {
             title: "IT & Entwicklung",
             links: [
-                { label: "Preisatlas", href: "/coming-soon" },
-                { label: "Buildeo Österreich", href: "/coming-soon" },
-                { label: "Sicherheit", href: "/coming-soon" },
+                { label: "Preisatlas", href: "/preisatlas" },
+                { label: "Buildeo Österreich", href: "/buildeo-osterreich" },
+                { label: "Sicherheit", href: "/sicherheit" },
             ],
         },
         {
-            title: "AGB & Rechtliches",
+            title: "Schnellzugriff",
             links: [
-                { label: "AGB & Rechtliche Hinweise", href: "/coming-soon" },
-                { label: "Verbraucherinformationen", href: "/coming-soon" },
-                { label: "Datenschutz", href: "/coming-soon" },
-                { label: "Zum Privacy-Manager", href: "/coming-soon" },
-                { label: "Datenschutz-Kodex für Geodatendienste", href: "/coming-soon" },
-                { label: "Sicherheit", href: "/coming-soon" },
+                { label: "Karriere", href: "/karriere" },
+                { label: "Presse", href: "/presse" },
+                { label: "Newsletter", href: "/newsletter" },
             ],
         },
         {
-            title: "Für Profis",
+            title: "Kontakt",
             links: [
-                { label: "Produktübersicht", href: "/coming-soon" },
-                { label: "Maklernetzwerk", href: "/coming-soon" },
-                { label: "Eigentümeranfragen", href: "/coming-soon" },
-                { label: "Finanzierungsanfragen", href: "/coming-soon" },
-                { label: "Umzugsanfragen", href: "/coming-soon" },
-                { label: "Werben mit uns", href: "/coming-soon" },
+                { label: "Adresse: Musterstraße 12, 10115 Berlin, Deutschland", href: "https://maps.google.com/?q=Musterstraße+12+10115+Berlin" },
+                { label: "Telefon: +49 30 12345678", href: "tel:+493012345678" },
+                { label: "E-Mail: support@buildeo.com", href: "mailto:support@buildeo.com" },
             ],
         },
     ],
-    copyright: `© Copyright ${new Date().getFullYear()} Buildeo Inc. All rights reserved.`,
+    copyright: `© Copyright ${new Date().getFullYear()} Buildeo Inc. Alle Rechte vorbehalten.`,
 };
 

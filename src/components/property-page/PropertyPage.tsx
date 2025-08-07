@@ -93,8 +93,8 @@ const PropertyPage = () => {
                     <div className={styles.propertyDetails}>
                         <h2>{property?.title}</h2>
                         <span className={styles.reviewMetrics}>
-                            <p>{property?.offerings ? property.offerings : "No Offerings"}</p>
-                            <p>{property?.reviews && property.reviews.length > 0 ? property.reviews.length : "No Rating"}</p>
+                           <p>{property?.offerings ? property.offerings : "Keine Angebote"}</p>
+                            <p>{property?.reviews && property.reviews.length > 0 ? property.reviews.length : "Keine Bewertung"}</p>
                         </span>
                         <h3>{property?.price}€</h3>
                         <p>{property?.description}</p>
@@ -118,11 +118,11 @@ const PropertyPage = () => {
                                     showAlert("Client didn't provide a phone number", "warning");
                                 }
                             }}>
-                            Ask about product detail
+                            Fragen Sie nach Produktdetails
                         </Button>
                     </div>
                     <div className={styles.action}>
-                        <h3>Make your orders</h3>
+                        <h3>Bestellung aufgeben</h3>
                         <div className={styles.incrementWrapper}>
                             <div className={styles.incrementOrders}>
                                 <IconButton
@@ -148,8 +148,7 @@ const PropertyPage = () => {
                                         borderRadius: "5px",
                                         padding: "10px"
                                     }}
-                                    onClick={handleIncrement}
-                                >
+                                    onClick={handleIncrement}>
                                     +
                                 </IconButton>
                             </div>
@@ -159,7 +158,7 @@ const PropertyPage = () => {
                             <Button
                                 className={styles.orderButton}
                                 variant="contained"
-                                disabled={user?.role === "seller" }
+                                disabled={user?.role === "seller"}
                                 sx={{
                                     borderRadius: "50px",
                                     textTransform: "none",
@@ -181,7 +180,7 @@ const PropertyPage = () => {
                                         showAlert("property is not available", "error");
                                     }
                                 }}>
-                                Order in Seller
+                                Beim Verkäufer bestellen
                             </Button>
                             <Button
                                 className={styles.orderButton}
@@ -195,17 +194,17 @@ const PropertyPage = () => {
                                     color: "#057762"
                                 }}
                                 onClick={() => {
-                                    showAlert("property added to your's wishlist", "success");
+                                    showAlert("Immobilie zur Wunschliste hinzugefügt", "success");
                                     setIsAddedToWishlist(true);
                                 }}
                                 disabled={isAddedToWishlist || user?.role === "seller"}>
-                                {isAddedToWishlist ? "Added to Wishlist" : "Add to Wishlist"}
+                                {isAddedToWishlist ? "Zur Wunschliste hinzugefügt" : "Zur Wunschliste hinzufügen"}
                             </Button>
                         </div>
                     </div>
                 </div>
                 <div className={styles.reviewContent}>
-                    <h2>Review and Rates</h2>
+                    <h2>Bewertungen und Bewertungen</h2>
                     {alert && <Alert severity="info">{alert}</Alert>}
                     {property?.reviews && property.reviews.length > 0 ? (
                         property.reviews.map((review) => (
@@ -222,7 +221,9 @@ const PropertyPage = () => {
                         <p>No reviews available</p>
                     )}
                     <Button color="error" sx={{borderRadius: "50px", textTransform: "none"}}
-                            onClick={handleLeaveComment}>Leave Comment</Button>
+                            onClick={handleLeaveComment}>
+                        Kommentar hinterlassen
+                    </Button>
                     {showForm && !alert && (
                         <Formik
                             initialValues={{
@@ -258,7 +259,7 @@ const PropertyPage = () => {
                                         }
                                     }}>
                                     <div>
-                                        <h4>Leave Rating feedback</h4>
+                                        <h4>Bewertung abgeben</h4>
                                         <Rating
                                             name="rating"
                                             value={values.rating}
@@ -268,7 +269,8 @@ const PropertyPage = () => {
                                             }}
                                         />
                                         {touched.rating && errors.rating && (
-                                            <div style={{color: 'red'}}>{errors.rating}</div>
+                                            <div
+                                                style={{color: 'red'}}>{errors.rating === 'Rating must be at least 1' ? 'Die Bewertung muss mindestens 1 sein' : 'Bewertung ist erforderlich'}</div>
                                         )}
                                     </div>
                                     <Textarea
@@ -293,8 +295,8 @@ const PropertyPage = () => {
                                             color: "#076554",
                                             width: '100%',
                                             background: "#00ffd0"
-                                    }}>
-                                        Leave Comment
+                                        }}>
+                                        Kommentar hinterlassen
                                     </Button>
                                 </Form>
                             )}

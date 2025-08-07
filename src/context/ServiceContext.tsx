@@ -28,6 +28,7 @@ interface Service {
 interface ServiceContextProps {
     service: Service | null;
     setServiceId: (id: string) => void;
+    loading: boolean;
 }
 
 const ServiceContext = createContext<ServiceContextProps | undefined>(undefined);
@@ -35,10 +36,12 @@ const ServiceContext = createContext<ServiceContextProps | undefined>(undefined)
 export const ServiceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [service, setService] = useState<Service | null>(null);
     const [serviceId, setServiceId] = useState<string | null>(localStorage.getItem('serviceId'));
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchService = async () => {
             if (serviceId) {
+                setLoading(true);
                 try {
                     const response = await newRequest.get(`service/get-service`, {
                         params: { serviceId },
@@ -46,7 +49,12 @@ export const ServiceProvider: React.FC<{ children: React.ReactNode }> = ({ child
                     setService(response.data);
                 } catch (error) {
                     console.error('Error fetching service:', error);
+                } finally {
+                    setLoading(false);
                 }
+            } else {
+                setService(null);
+                setLoading(false);
             }
         };
 
@@ -60,7 +68,7 @@ export const ServiceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }, [serviceId]);
 
     return (
-        <ServiceContext.Provider value={{ service, setServiceId }}>
+        <ServiceContext.Provider value={{ service, setServiceId, loading }}>
             {children}
         </ServiceContext.Provider>
     );
