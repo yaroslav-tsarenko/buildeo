@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import "./globals.css";
 import Footer from "@/components/footer/Footer";
 import React from "react";
@@ -17,37 +19,38 @@ export async function generateMetadata() {
 
     return {
         metadataBase: new URL(`https://${baseURL}`),
-        title: "BUILDEO",
-        description: "BEST services provider",
+        title: "BUILDEO – Immobilien & Services digital verwalten",
+        description:
+            "Buildeo ist Ihre Plattform für digitale Immobilienvermittlung, Serviceangebote und moderne Wohnlösungen in Deutschland und Österreich. Inserieren, finden und verwalten Sie alles online.",
         keywords: [
-            "Frontend Developer", "Fullstack Developer", "Web Developer", "JavaScript Developer",
-            "React Developer", "Next.js Developer", "Node.js Developer", "MongoDB Developer",
-            "Freelance Frontend Developer", "Hire Fullstack Developer", "Remote Web Developer",
-            "Responsive Website Developer", "Professional Developer Portfolio", "Yaroslav Tsarenko Developer",
-            "Portfolio with React", "Next.js Projects", "Modern Web Developer", "SCSS Tailwind Developer",
-            "Zustand State Management", "Stripe Checkout Integration", "JWT Auth Developer",
-            "React Frontend Engineer", "Fullstack Engineer", "Ukraine Web Developer",
-            "Top Web Developer 2025", "Experienced React Developer", "Express.js Backend Developer",
-            "JavaScript Developer Portfolio", "Web App Developer", "Software Engineer Portfolio"
+            "Immobilienplattform", "Wohnung mieten", "Haus verkaufen", "digitale Immobilienvermittlung",
+            "Immobiliensuche Deutschland", "Immobiliensuche Österreich", "Immobilien digital inserieren",
+            "Umzugsservice buchen", "Handwerker finden", "Immobilienanzeigen erstellen",
+            "Mietwohnungen online", "Haus mieten Graz", "Wohnung Wien", "Bauträger digital",
+            "Services für Vermieter", "Plattform für Immobilien und Services", "Immobilienpreise Österreich",
+            "Preisatlas Deutschland", "Digitale Vertragsabwicklung", "DSGVO-konforme Plattform",
+            "Immobilienservice 2025", "Innovative Immobilienlösung", "Immobilienportal",
+            "Transparente Wohnungsvermittlung", "Sichere digitale Immobilienplattform"
         ],
         openGraph: {
-            title: `buildeo Portfolio`,
-            description: "Portfolio website showcasing my work.",
+            title: "BUILDEO – Ihre Plattform für Immobilien & Services",
+            description:
+                "Finden, vermieten und verwalten Sie Immobilien und wohnnahe Dienstleistungen bequem online mit Buildeo.",
             url: baseURL,
-            siteName: `buildeo's Portfolio`,
-            locale: "en_US",
+            siteName: "BUILDEO",
+            locale: "de_DE",
             type: "website",
             images: [
                 {
                     url: ogImage,
-                    alt: "BUILDEO",
+                    alt: "BUILDEO – Digitale Immobilienplattform",
                 },
             ],
         },
         twitter: {
             card: "summary_large_image",
-            title: "BUILDEO",
-            description: "BEST services provider",
+            title: "BUILDEO – Immobilien & Services digital verwalten",
+            description: "Digitale Lösungen für Immobilien und Services in Deutschland & Österreich.",
             images: [ogImage],
         },
         robots: {

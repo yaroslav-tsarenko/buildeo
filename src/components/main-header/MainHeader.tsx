@@ -191,15 +191,33 @@ const MainHeader = () => {
                                 :
                                 <>
                                     <Link href="/sign-up">
-                                        <Button variant="outlined" sx={{
-                                            color: "red",
-                                            borderColor: "red",
-                                            textTransform: "none"
+                                        <Button variant="outlined"  sx={{
+                                            textTransform: "none",
+                                            borderRadius: "15px",
+                                            lineHeight: "1.5",
+                                            boxShadow: "none",
+                                            border: "1px solid #099E9A",
+                                            backgroundColor: "rgba(10,186,181,0)",
+                                            color: "#099E9A",
+                                            "&:hover": {
+                                                color: "white",
+                                                backgroundColor: "#099E9A"
+                                            }
                                         }}>Register</Button>
                                     </Link>
                                     <Link href="/sign-in">
-                                        <Button variant="contained" color="error"
-                                                sx={{textTransform: "none"}}>Login</Button>
+                                        <Button variant="contained"
+                                                sx={{
+                                                    textTransform: "none",
+                                                    borderRadius: "15px",
+                                                    lineHeight: "1.5",
+                                                    boxShadow: "none",
+                                                    backgroundColor: "#0ABAB5",
+                                                    color: "white",
+                                                    "&:hover": {
+                                                        backgroundColor: "#099E9A"
+                                                    }
+                                                }}>Login</Button>
                                     </Link>
                                 </>}
                         </div>

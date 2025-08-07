@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+>
+    <url>
+        <loc>https://buildeo.vercel.app/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url><loc>https://buildeo.vercel.app/agb_and_rechtliche_hinweise</loc></url>
+    <url><loc>https://buildeo.vercel.app/blog</loc></url>
+    <url><loc>https://buildeo.vercel.app/buildeo-osterreich</loc></url>
+    <url><loc>https://buildeo.vercel.app/chat</loc></url>
+    <url><loc>https://buildeo.vercel.app/coming-soon</loc></url>
+    <url><loc>https://buildeo.vercel.app/cookie-richtlinie</loc></url>
+    <url><loc>https://buildeo.vercel.app/dashboard</loc></url>
+    <url><loc>https://buildeo.vercel.app/datenschutz</loc></url>
+    <url><loc>https://buildeo.vercel.app/favorable-offer</loc></url>
+    <url><loc>https://buildeo.vercel.app/karriere</loc></url>
+    <url><loc>https://buildeo.vercel.app/newsletter</loc></url>
+    <url><loc>https://buildeo.vercel.app/preisatlas</loc></url>
+    <url><loc>https://buildeo.vercel.app/presse</loc></url>
+    <url><loc>https://buildeo.vercel.app/properties</loc></url>
+    <url><loc>https://buildeo.vercel.app/sell-property</loc></url>
+    <url><loc>https://buildeo.vercel.app/service-page</loc></url>
+    <url><loc>https://buildeo.vercel.app/services</loc></url>
+    <url><loc>https://buildeo.vercel.app/sicherheit</loc></url>
+    <url><loc>https://buildeo.vercel.app/sign-in</loc></url>
+    <url><loc>https://buildeo.vercel.app/sign-up</loc></url>
+    <url><loc>https://buildeo.vercel.app/sign-up-buyer</loc></url>
+    <url><loc>https://buildeo.vercel.app/uber-uns</loc></url>
+    <url><loc>https://buildeo.vercel.app/vermieten</loc></url>
+</urlset>

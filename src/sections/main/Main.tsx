@@ -1,51 +1,69 @@
-"use client"
-
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Main.module.scss';
 import Header from "@/components/header/Header";
 import { Autocomplete } from "@mui/joy";
-import { useServices } from '@/context/ServicesContext';
+import {Service, useServices} from '@/context/ServicesContext';
 import { Badge, Button, FormControlLabel, Switch } from "@mui/material";
 import { CiSearch } from "react-icons/ci";
 import { heroContent } from "@/assets/config/content";
+import { useRouter } from 'next/navigation';
 
 const Main = () => {
+    const router = useRouter();
     const { services } = useServices();
-    const serviceTitles = services.map((service) => service.title);
+    const [isToggled, setIsToggled] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+    const [selectedService, setSelectedService] = useState<Service | null>(null);
+    const typingIntervalRef = React.useRef<NodeJS.Timeout | null>(null);
 
-    const [isToggled, setIsToggled] = React.useState(false);
-    const [inputValue, setInputValue] = React.useState("");
+    const sanitizeTitle = (title: string) => title.replace(/\s+/g, " ").trim();
+
+    const getRandomTitle = () => {
+        if (services.length === 0) return "";
+        let filtered = services.filter(s => s.title !== inputValue);
+        if (filtered.length === 0) filtered = services;
+        return sanitizeTitle(filtered[Math.floor(Math.random() * filtered.length)].title);
+    };
+
+    const simulateTyping = (text: string) => {
+        setInputValue("");
+        if (typingIntervalRef.current) clearTimeout(typingIntervalRef.current);
+        let index = 0;
+        const typeChar = () => {
+            setInputValue((prev) => prev + text[index]);
+            index++;
+            if (index < text.length) {
+                typingIntervalRef.current = setTimeout(typeChar, 100);
+            }
+        };
+        typeChar();
+    };
 
     const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsToggled(event.target.checked);
-
-        if (event.target.checked) {
-            const randomTitle = sanitizeTitle(
-                serviceTitles[Math.floor(Math.random() * serviceTitles.length)]
-            );
+        const checked = event.target.checked;
+        setIsToggled(checked);
+        if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+        if (checked) {
+            const randomTitle = getRandomTitle();
             simulateTyping(randomTitle);
         } else {
             setInputValue("");
         }
     };
 
-    const sanitizeTitle = (title: string) => {
-        return title.replace(/\s+/g, " ").trim(); // Remove extra spaces
+    const handleSearch = () => {
+        if (selectedService) {
+            window.localStorage.setItem('serviceId', selectedService._id);
+        }
+        router.push('/services');
     };
 
-    const simulateTyping = (text: string) => {
-        let index = 0;
-        setInputValue("");
+    React.useEffect(() => {
+        return () => {
+            if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+        };
+    }, []);
 
-        const typingInterval = setInterval(() => {
-            if (index < text.length) {
-                setInputValue((prev) => prev + text[index]);
-                index++;
-            } else {
-                clearInterval(typingInterval);
-            }
-        }, 100);
-    };
     return (
         <div className={styles.wrapper}>
             <Header />
@@ -54,10 +72,16 @@ const Main = () => {
                 <div className={styles.searchbarWrapper}>
                     <div className={styles.searchbar}>
                         <Autocomplete
-                            placeholder="Search for a service"
-                            options={serviceTitles}
-                            value={inputValue}
+                            placeholder="Dienstleistung suchen"
+                            options={services}
+                            getOptionLabel={(option) => option.title}
+                            value={selectedService}
+                            inputValue={inputValue}
                             onInputChange={(event, newValue) => setInputValue(newValue)}
+                            onChange={(event, newValue) => {
+                                setSelectedService(newValue);
+                                setInputValue(newValue ? newValue.title : "");
+                            }}
                             sx={{ maxWidth: 800, width: "100%", height: 60, borderRadius: "15px" }}
                         />
                         <Button
@@ -75,6 +99,7 @@ const Main = () => {
                                     backgroundColor: "#099E9A"
                                 }
                             }}
+                            onClick={handleSearch}
                         >
                             {heroContent.buttonText}
                         </Button>
@@ -92,7 +117,7 @@ const Main = () => {
                                     color="success"
                                 />
                             }
-                            label="Toggle Feature"
+                            label="Funktion umschalten"
                         />
                     </div>
                 </div>

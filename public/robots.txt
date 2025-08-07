@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /account/
+Disallow: /dashboard/
+Disallow: /chat/
+Disallow: /sign-in/
+Disallow: /sign-up/
+Disallow: /sign-up-buyer/
+
+Sitemap: https://www.buildeo.vercel.app/sitemap.xml

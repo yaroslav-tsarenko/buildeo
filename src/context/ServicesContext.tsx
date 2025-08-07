@@ -6,7 +6,7 @@ import Image from "next/image";
 import { CSSProperties } from "react";
 import logo from "@/assets/logos/buildeo-logo-dark.svg"
 
-type Service = {
+export type Service = {
     _id: string;
     category: string;
     description: string;

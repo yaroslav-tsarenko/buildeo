@@ -1,4 +1,3 @@
-
 import Account from '@/components/account/Account';
 import { ServicesProvider } from '@/context/ServicesContext';
 import React from 'react';
